@@ -89,9 +89,9 @@ const fn bytes_to_str(bytes: &'static [u8]) -> &'static str {
 
 impl<const R: u8, const G: u8, const B: u8> CustomColor<R, G, B> {
     const ANSI_FG_U8: [u8; 19] = rgb_to_ansi(R, G, B, true);
-    const ANSI_BG_U8: [u8; 19] = rgb_to_ansi(R, G, B, true);
+    const ANSI_BG_U8: [u8; 19] = rgb_to_ansi(R, G, B, false);
     const RAW_ANSI_FG_U8: [u8; 16] = rgb_to_ansi_color(R, G, B, true);
-    const RAW_ANSI_BG_U8: [u8; 16] = rgb_to_ansi_color(R, G, B, true);
+    const RAW_ANSI_BG_U8: [u8; 16] = rgb_to_ansi_color(R, G, B, false);
 }
 
 impl<const R: u8, const G: u8, const B: u8> crate::private::Sealed for CustomColor<R, G, B> {}
