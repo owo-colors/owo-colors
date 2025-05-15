@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.2.1] - 2025-05-15
+
+### Fixed
+
+- Fixed a couple of bugs while rendering custom colors ([#144]). Thanks [https://github.com/MiguelValentine](@MiguelValentine) for your first contribution!
+
+[#144]: https://github.com/owo-colors/owo-colors/pull/144
+
 ## [4.2.0] - 2025-02-22
 
 ### Added
@@ -29,6 +37,7 @@
 
 - owo-colors now lives under its own organization, https://github.com/owo-colors.
 
+[4.2.1]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.1
 [4.2.0]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.0
 [4.1.1]: https://github.com/owo-colors/owo-colors/releases/tag/v4.1.1
 
