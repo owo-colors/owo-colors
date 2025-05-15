@@ -105,7 +105,7 @@ macro_rules! xterm_colors {
                 const ANSI_BG: &'static str = concat!("\x1b[48;5;", stringify!($xterm_num), "m");
 
                 const RAW_ANSI_BG: &'static str = concat!("48;5;", stringify!($xterm_num));
-                const RAW_ANSI_FG: &'static str = concat!("48;5;", stringify!($xterm_num));
+                const RAW_ANSI_FG: &'static str = concat!("38;5;", stringify!($xterm_num));
 
                 #[doc(hidden)]
                 type DynEquivalent = dynamic::XtermColors;
