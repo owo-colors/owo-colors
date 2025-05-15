@@ -14,22 +14,22 @@ impl crate::private::Sealed for Rgb {}
 impl DynColor for Rgb {
     fn fmt_ansi_fg(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let Rgb(r, g, b) = self;
-        write!(f, "\x1b[38;2;{};{};{}m", r, g, b)
+        write!(f, "\x1b[38;2;{r};{g};{b}m")
     }
 
     fn fmt_ansi_bg(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let Rgb(r, g, b) = self;
-        write!(f, "\x1b[48;2;{};{};{}m", r, g, b)
+        write!(f, "\x1b[48;2;{r};{g};{b}m")
     }
 
     fn fmt_raw_ansi_fg(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let Rgb(r, g, b) = self;
-        write!(f, "38;2;{};{};{}", r, g, b)
+        write!(f, "38;2;{r};{g};{b}")
     }
 
     fn fmt_raw_ansi_bg(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let Rgb(r, g, b) = self;
-        write!(f, "48;2;{};{};{}", r, g, b)
+        write!(f, "48;2;{r};{g};{b}")
     }
 
     #[doc(hidden)]
