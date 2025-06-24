@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.2.2] - 2025-06-23
+
+### Fixed
+
+Fixed applying a background color and a text effect (like underline or italic) at the same time ([#145]).
+
+[#145]: https://github.com/owo-colors/owo-colors/issues/145
+
 ## [4.2.1] - 2025-05-15
 
 ### Fixed
@@ -37,6 +45,7 @@
 
 - owo-colors now lives under its own organization, https://github.com/owo-colors.
 
+[4.2.2]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.2
 [4.2.1]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.1
 [4.2.0]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.0
 [4.1.1]: https://github.com/owo-colors/owo-colors/releases/tag/v4.1.1
