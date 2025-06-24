@@ -528,6 +528,7 @@ impl Style {
                 f.write_str(";")?;
             }
             <DynColors as DynColor>::fmt_raw_ansi_bg(&bg, f)?;
+            semicolon = true;
         }
 
         if format_effect {
