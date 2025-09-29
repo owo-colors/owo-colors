@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.3] - 2025-09-29
+
+### Fixed
+
+Replaced obsolete `doc_auto_cfg` with `doc_cfg`, to fix Rust nightly builds with the `doc_cfg` flag enabled.
+
 ## [4.2.2] - 2025-06-23
 
 ### Fixed
@@ -45,6 +51,7 @@ Fixed applying a background color and a text effect (like underline or italic) a
 
 - owo-colors now lives under its own organization, https://github.com/owo-colors.
 
+[4.2.3]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.3
 [4.2.2]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.2
 [4.2.1]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.1
 [4.2.0]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.0
