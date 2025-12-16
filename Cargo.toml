@@ -11,6 +11,7 @@ license = "MIT"
 readme = "README.md"
 keywords = ["cli", "color", "no-std", "terminal", "ansi_term"]
 categories = ["command-line-interface", "no-std::no-alloc"]
+include = ["Cargo.toml", "build.rs", "README.md", "CHANGELOG.md", "LICENSE", "src/**/*.rs"]
 
 [package.metadata.docs.rs]
 all-features = true
