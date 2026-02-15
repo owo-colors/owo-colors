@@ -260,6 +260,7 @@ const _: () = (); // workaround for syntax highlighting bug
 ///
 /// Use [`style`](OwoColorize::style) to apply a [`Style`]
 ///
+#[rust_analyzer::completions(ignore_flyimport_methods)]
 pub trait OwoColorize: Sized {
     // Implementation note: even though the "OwoColorize: Sized" condition _can_ be dropped, we
     // currently don't do that for API compatibility reasons.
