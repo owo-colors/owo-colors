@@ -57,6 +57,7 @@ macro_rules! style_methods {
 const _: () = (); // workaround for syntax highlighting bug
 
 /// A wrapper type which applies a [`Style`] when displaying the inner type
+#[derive(Clone, Copy, PartialEq)]
 pub struct Styled<T> {
     /// The target value to be styled
     pub(crate) target: T,
