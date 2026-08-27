@@ -1,7 +1,7 @@
 [package]
 name = "owo-colors"
 version = "4.3.0"
-rust-version = "1.81"
+rust-version = "1.83"
 authors = ["jam1garner <8260240+jam1garner@users.noreply.github.com>"]
 edition = "2021"
 documentation = "https://docs.rs/owo-colors"
@@ -16,6 +16,9 @@ include = ["Cargo.toml", "build.rs", "README.md", "CHANGELOG.md", "LICENSE", "sr
 [package.metadata.docs.rs]
 all-features = true
 rustdoc-args = ["--cfg", "doc_cfg"]
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(doc_cfg)'] }
 
 [[example]]
 name = "supports_color"

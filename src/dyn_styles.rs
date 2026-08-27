@@ -47,7 +47,7 @@ macro_rules! style_methods {
             #[$meta]
             #[must_use]
             pub const fn $name(mut self) -> Self {
-                self.style_flags = self.style_flags.$set_name(true);
+                self.style_flags.$set_name(true);
                 self
             }
         )*
@@ -116,10 +116,8 @@ macro_rules! style_flags_methods {
                 ((self.0 >> $shift) & 1) != 0
             }
 
-            #[must_use]
-            const fn $set_name(mut self, $name: bool) -> Self {
+            const fn $set_name(&mut self, $name: bool) {
                 self.0 = (self.0 & !(1 << $shift)) | (($name as u8) << $shift);
-                self
             }
         )*
     };
@@ -325,30 +323,28 @@ impl Style {
                 self.bold = to;
             }
             Dimmed => {
-                // This somewhat contorted construction is required because const fns can't take
-                // mutable refs as of Rust 1.81.
-                self.style_flags = self.style_flags.set_dimmed(to);
+                self.style_flags.set_dimmed(to);
             }
             Italic => {
-                self.style_flags = self.style_flags.set_italic(to);
+                self.style_flags.set_italic(to);
             }
             Underline => {
-                self.style_flags = self.style_flags.set_underline(to);
+                self.style_flags.set_underline(to);
             }
             Blink => {
-                self.style_flags = self.style_flags.set_blink(to);
+                self.style_flags.set_blink(to);
             }
             BlinkFast => {
-                self.style_flags = self.style_flags.set_blink_fast(to);
+                self.style_flags.set_blink_fast(to);
             }
             Reversed => {
-                self.style_flags = self.style_flags.set_reversed(to);
+                self.style_flags.set_reversed(to);
             }
             Hidden => {
-                self.style_flags = self.style_flags.set_hidden(to);
+                self.style_flags.set_hidden(to);
             }
             Strikethrough => {
-                self.style_flags = self.style_flags.set_strikethrough(to);
+                self.style_flags.set_strikethrough(to);
             }
         }
         self
@@ -634,18 +630,7 @@ impl<T> Styled<T> {
     }
 
     /// Returns a mutable reference to the inner value to be styled.
-    ///
-    /// *This method is const on Rust 1.83+.*
-    #[cfg(const_mut_refs)]
     pub const fn inner_mut(&mut self) -> &mut T {
-        &mut self.target
-    }
-
-    /// Returns a mutable reference to the inner value to be styled.
-    ///
-    /// *This method is const on Rust 1.83+.*
-    #[cfg(not(const_mut_refs))]
-    pub fn inner_mut(&mut self) -> &mut T {
         &mut self.target
     }
 }
