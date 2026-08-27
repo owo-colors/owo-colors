@@ -1,5 +1,8 @@
 # Changelog
 
+<!-- next-header -->
+## Unreleased - ReleaseDate
+
 ## [4.3.0] - 2026-02-22
 
 ### Fixed
@@ -64,6 +67,7 @@ Fixed applying a background color and a text effect (like underline or italic) a
 
 - owo-colors now lives under its own organization, https://github.com/owo-colors.
 
+<!-- next-url -->
 [4.3.0]: https://github.com/owo-colors/owo-colors/releases/tag/v4.3.0
 [4.2.3]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.3
 [4.2.2]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.2

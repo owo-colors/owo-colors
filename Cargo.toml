@@ -17,6 +17,14 @@ include = ["Cargo.toml", "build.rs", "README.md", "CHANGELOG.md", "LICENSE", "sr
 all-features = true
 rustdoc-args = ["--cfg", "doc_cfg"]
 
+[package.metadata.release]
+pre-release-replacements = [
+    { file = "CHANGELOG.md", search = "Unreleased", replace = "[{{version}}]", min = 1 },
+    { file = "CHANGELOG.md", search = "ReleaseDate", replace = "{{date}}", min = 1 },
+    { file = "CHANGELOG.md", search = "<!-- next-header -->", replace = "<!-- next-header -->\n## Unreleased - ReleaseDate\n", exactly = 1 },
+    { file = "CHANGELOG.md", search = "<!-- next-url -->", replace = "<!-- next-url -->\n[{{version}}]: https://github.com/owo-colors/owo-colors/releases/tag/v{{version}}", exactly = 1 },
+]
+
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(doc_cfg)'] }
 
