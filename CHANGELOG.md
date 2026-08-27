@@ -3,6 +3,10 @@
 <!-- next-header -->
 ## Unreleased - ReleaseDate
 
+### Changed
+
+- Updated MSRV to Rust 1.83. Thanks [Expyron](https://github.com/Expyron) for your first contribution!
+
 ## [4.3.0] - 2026-02-22
 
 ### Fixed
