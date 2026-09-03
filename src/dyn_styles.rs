@@ -57,6 +57,7 @@ macro_rules! style_methods {
 const _: () = (); // workaround for syntax highlighting bug
 
 /// A wrapper type which applies a [`Style`] when displaying the inner type
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub struct Styled<T> {
     /// The target value to be styled
     pub(crate) target: T,
@@ -79,7 +80,7 @@ pub struct Styled<T> {
 ///
 /// println!("{}", "red text, white background, struck through".style(my_style));
 /// ```
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct Style {
     pub(crate) fg: Option<DynColors>,
     pub(crate) bg: Option<DynColors>,
@@ -88,7 +89,7 @@ pub struct Style {
 }
 
 #[repr(transparent)]
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub(crate) struct StyleFlags(pub(crate) u8);
 
 impl StyleFlags {
