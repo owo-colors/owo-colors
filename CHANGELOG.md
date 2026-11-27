@@ -3,6 +3,8 @@
 <!-- next-header -->
 ## Unreleased - ReleaseDate
 
+## [4.4.1] - 2026-11-27
+
 ### Added
 
 - `Styled<T>` now implements `Copy`, `Clone`, `PartialEq`, and `Eq` when `T` implements the corresponding trait. `Style` now implements `Eq` as well ([#159]). Thanks [mageowl](https://github.com/mageowl) for your first contribution!
@@ -86,6 +88,7 @@ Fixed applying a background color and a text effect (like underline or italic) a
 - owo-colors now lives under its own organization, https://github.com/owo-colors.
 
 <!-- next-url -->
+[4.4.1]: https://github.com/owo-colors/owo-colors/releases/tag/v4.4.1
 [4.4.0]: https://github.com/owo-colors/owo-colors/releases/tag/v4.4.0
 [4.3.0]: https://github.com/owo-colors/owo-colors/releases/tag/v4.3.0
 [4.2.3]: https://github.com/owo-colors/owo-colors/releases/tag/v4.2.3
