@@ -71,26 +71,33 @@ impl DynColor for DynColors {
 #[derive(Debug)]
 pub struct ParseColorError;
 
+fn decode_hex_byte(high: u8, low: u8) -> Result<u8, ParseColorError> {
+    Ok((decode_hex_digit(high)? << 4) | decode_hex_digit(low)?)
+}
+
+fn decode_hex_digit(digit: u8) -> Result<u8, ParseColorError> {
+    match digit {
+        b'0'..=b'9' => Ok(digit - b'0'),
+        b'a'..=b'f' => Ok(digit - b'a' + 10),
+        b'A'..=b'F' => Ok(digit - b'A' + 10),
+        _ => Err(ParseColorError),
+    }
+}
+
 impl core::str::FromStr for DynColors {
     type Err = ParseColorError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         if let Some(hex) = s.strip_prefix('#') {
-            match hex.len() {
-                3 => {
-                    // TODO
-                    Err(ParseColorError)
-                }
-                6 => {
-                    if !hex.bytes().all(|b| b.is_ascii_hexdigit()) {
-                        return Err(ParseColorError);
-                    }
-                    Ok(Self::Rgb(
-                        u8::from_str_radix(&hex[0..2], 16).or(Err(ParseColorError))?,
-                        u8::from_str_radix(&hex[2..4], 16).or(Err(ParseColorError))?,
-                        u8::from_str_radix(&hex[4..6], 16).or(Err(ParseColorError))?,
-                    ))
-                }
+            // Work with the raw bytes to avoid having to think about multibyte
+            // UTF-8 (outside of rejecting it in decode_hex_byte).
+            match *hex.as_bytes() {
+                [r_high, r_low, g_high, g_low, b_high, b_low] => Ok(Self::Rgb(
+                    decode_hex_byte(r_high, r_low)?,
+                    decode_hex_byte(g_high, g_low)?,
+                    decode_hex_byte(b_high, b_low)?,
+                )),
+                // TODO: 3-digit #rgb isn't supported yet.
                 _ => Err(ParseColorError),
             }
         } else {

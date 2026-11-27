@@ -81,7 +81,25 @@ fn test_parse() {
         "#eb4034" == DynColors::Rgb(235, 64, 52),
         "#000000" == DynColors::Rgb(0, 0, 0),
         "#FFFFFF" == DynColors::Rgb(255, 255, 255),
+        "#1a2B3c" == DynColors::Rgb(0x1a, 0x2b, 0x3c),
     );
+}
+
+#[test]
+fn test_parse_hex_every_byte_value() {
+    for value in 0..=u8::MAX {
+        for (input, expected) in [
+            (format!("#{value:02x}0000"), DynColors::Rgb(value, 0, 0)),
+            (format!("#00{value:02X}00"), DynColors::Rgb(0, value, 0)),
+            (format!("#0000{value:02x}"), DynColors::Rgb(0, 0, value)),
+        ] {
+            assert_eq!(
+                input.parse::<DynColors>().ok(),
+                Some(expected),
+                "parsing {input:?}"
+            );
+        }
+    }
 }
 
 #[test]
@@ -99,8 +117,13 @@ fn test_parse_invalid_hex_no_panic() {
         "#a\u{1f600}b",
         "#0\u{00e9}000",
         "#000\u{00e9}0",
-        // Signed hex digits accepted by `u8::from_str_radix` unless filtered.
+        // Sign characters aren't hex digits (some of these were previously
+        // accepted).
         "#+1+2+3",
+        "#00+100",
+        "#-1-2-3",
+        "##12345",
+        "# 12345",
     ] {
         assert!(
             invalid.parse::<DynColors>().is_err(),
