@@ -75,17 +75,22 @@ impl core::str::FromStr for DynColors {
     type Err = ParseColorError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        if s.chars().next().ok_or(ParseColorError)? == '#' {
-            match s.len() {
-                4 => {
+        if let Some(hex) = s.strip_prefix('#') {
+            match hex.len() {
+                3 => {
                     // TODO
                     Err(ParseColorError)
                 }
-                7 => Ok(Self::Rgb(
-                    u8::from_str_radix(&s[1..3], 16).or(Err(ParseColorError))?,
-                    u8::from_str_radix(&s[3..5], 16).or(Err(ParseColorError))?,
-                    u8::from_str_radix(&s[5..7], 16).or(Err(ParseColorError))?,
-                )),
+                6 => {
+                    if !hex.bytes().all(|b| b.is_ascii_hexdigit()) {
+                        return Err(ParseColorError);
+                    }
+                    Ok(Self::Rgb(
+                        u8::from_str_radix(&hex[0..2], 16).or(Err(ParseColorError))?,
+                        u8::from_str_radix(&hex[2..4], 16).or(Err(ParseColorError))?,
+                        u8::from_str_radix(&hex[4..6], 16).or(Err(ParseColorError))?,
+                    ))
+                }
                 _ => Err(ParseColorError),
             }
         } else {
