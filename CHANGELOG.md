@@ -3,6 +3,18 @@
 <!-- next-header -->
 ## Unreleased - ReleaseDate
 
+### Added
+
+- `Styled<T>` now implements `Copy`, `Clone`, `PartialEq`, and `Eq` when `T` implements the corresponding trait. `Style` now implements `Eq` as well ([#159]). Thanks [mageowl](https://github.com/mageowl) for your first contribution!
+
+[#159]: https://github.com/owo-colors/owo-colors/pull/159
+
+### Fixed
+
+- `DynColors::from_str` now returns an error instead of panicking when a hex color string contains multi-byte UTF-8 characters, such as `"#0é000"`. It also rejects hex strings with sign characters in them, such as `"#+1+2+3"`, which were previously accepted and parsed as `rgb(1, 2, 3)` ([#163]). Thanks [devonjonte](https://github.com/devonjonte) for your first contribution!
+
+[#163]: https://github.com/owo-colors/owo-colors/pull/163
+
 ## [4.4.0] - 2026-08-27
 
 ### Changed
