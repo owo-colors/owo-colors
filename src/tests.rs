@@ -79,7 +79,34 @@ fn test_parse() {
         "yellow" == DynColors::Ansi(AnsiColors::Yellow),
         "blue" == DynColors::Ansi(AnsiColors::Blue),
         "#eb4034" == DynColors::Rgb(235, 64, 52),
+        "#000000" == DynColors::Rgb(0, 0, 0),
+        "#FFFFFF" == DynColors::Rgb(255, 255, 255),
     );
+}
+
+#[test]
+fn test_parse_invalid_hex_no_panic() {
+    for invalid in [
+        "",
+        "#",
+        "#123",
+        "#12345",
+        "#1234567",
+        "#gggggg",
+        // 7-byte strings with multi-byte UTF-8 characters whose boundaries
+        // do not align with byte indices 1, 3, or 5.
+        "#\u{00e9}\u{00e9}\u{00e9}",
+        "#a\u{1f600}b",
+        "#0\u{00e9}000",
+        "#000\u{00e9}0",
+        // Signed hex digits accepted by `u8::from_str_radix` unless filtered.
+        "#+1+2+3",
+    ] {
+        assert!(
+            invalid.parse::<DynColors>().is_err(),
+            "expected Err for {invalid:?}"
+        );
+    }
 }
 
 #[test]
